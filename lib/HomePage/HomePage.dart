@@ -1,4 +1,8 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
+import 'package:foodie/HomePage/Restaurant.dart';
+import 'package:foodie/HomePage/profile.dart';
 
 import 'package:foodie/constants.dart';
 
@@ -13,9 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   // ignore: prefer_final_fields
   List<Widget> _pages = [
     const MainHomePage(),
+    const Restaurant(),
     const MainHomePage(),
-    const MainHomePage(),
-    const MainHomePage(),
+    const ProfileScreen(),
   ];
   int _selectedIndex = 0;
   @override
@@ -25,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         child: SizedBox(
-          height: 56,
+          height: 64,
           width: MediaQuery.of(context).size.width,
           child: Padding(
             padding: const EdgeInsets.only(left: 25, right: 25),
@@ -104,20 +108,43 @@ class MainHomePage extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            TopBar(),
-            SearchInput(),
-            PromoCard(),
-            Headline(),
+            const TopBar(),
+            const SearchInput(),
+            const PromoCard(),
+            const Headline(),
             SizedBox(
               height: he.height * .01,
             ),
-            CardListView(),
-
-            SHeadline(),
+            const CardListView(),
+            const SHeadline(),
             SizedBox(
               height: he.height * .01,
             ),
-            CardListView(),
+            const MenuListView(),
+            Container(
+              padding: const EdgeInsets.only(top: 15, right: 25, bottom: 15),
+              width: he.width / 1.1,
+              child: const Text(
+                "Eat What makes you happy",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 5, right: 25, bottom: 15),
+              height: he.height / 3,
+              width: he.width,
+              child: GridView.builder(
+                itemCount: foodItemList.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, mainAxisSpacing: 10),
+                  itemBuilder: (context, index) {
+                    return Card(foodItemList[index].name,
+                        foodItemList[index].imageUrl, "20 min away");
+                  }),
+            )
           ],
         ),
       ),
@@ -290,7 +317,6 @@ class PromoCard extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
 
@@ -400,7 +426,47 @@ class CardListView extends StatelessWidget {
                 "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Restaurant%20Image.png?alt=media&token=43509b4c-269e-4279-8c88-36dc9ed27a66",
                 "12 min away"),
             Card(
-                "Vegan",
+                "South Indian",
+                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
+                "15 min away"),
+            Card(
+                "Punjabi",
+                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
+                "15 min away"),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MenuListView extends StatelessWidget {
+  const MenuListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 25, right: 25),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 175,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            Card(
+                "Biryani",
+                "https://icon2.cleanpng.com/20180330/axe/kisspng-hyderabadi-biryani-indian-cuisine-dish-chicken-mea-biryani-5abedc42d00da9.6620510115224576668522.jpg",
+                "15 min away"),
+            Card(
+                "Pizza ",
+                "https://www.pikpng.com/pngl/m/327-3271979_half-a-pizza-transparent-background-clipart.png",
+                "12 min away"),
+            Card(
+                "South Indian",
+                "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
+                "15 min away"),
+            Card(
+                "Punjabi",
                 "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/Resturant%20Image%20(1).png?alt=media&token=461162b1-686b-4b0e-a3ee-fae1cb8b5b33",
                 "15 min away"),
           ],
