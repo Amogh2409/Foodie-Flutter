@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -22,6 +23,36 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              tooltip: 'Menu',
+              onPressed: () {},
+            ),
+            centerTitle: true,
+            title: Text(
+              'Profile',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(color: Colors.white),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    LineAwesomeIcons.moon,
+                    color: Colors.white,
+                  ))
+            ],
+            elevation: 0,
+          )),
     );
   }
 }
