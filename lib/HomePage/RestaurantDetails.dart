@@ -80,7 +80,8 @@ class MainScreen extends StatelessWidget {
           children: [
             TopImage(index: index),
             Rating(index: index),
-            FoodDescription(index: index)
+            FoodDescription(index: index),
+            MenuItems(index: index),
           ],
         ),
       ),
@@ -279,5 +280,111 @@ class _FoodDescriptionState extends State<FoodDescription> {
           });
         },
         child: Text(_showFullText ? "Show less" : "Show more"));
+  }
+}
+
+class MenuItems extends StatefulWidget {
+  
+  MenuItems({super.key, required this.index});
+
+  bool _onClick = true;
+  final int index;
+  @override
+  State<MenuItems> createState() => _MenuItemsState();
+}
+
+class _MenuItemsState extends State<MenuItems> {
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.only(top: 6, left: 25, right: 25),
+          height: size.height * 0.06,
+          width: size.width,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Menu",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Spacer(),
+              Text(
+                "View all",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 15,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+        for(int i =0; i<5; i++)
+        
+        Container(
+          padding: EdgeInsets.only(top: 6, left: 25, right: 25),
+          height: size.height * 0.06,
+          width: size.width,
+          margin: EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+            color: Colors.transparent.withOpacity(0.01),
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              
+              Text(restaurantList1[i].title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  )),
+              Row(
+                children: [
+                  Text(restaurantList1[i].price,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  )),
+              SizedBox(
+                width: 10,
+              ),
+              IconButton(onPressed: (){
+                setState(() {
+                  widget._onClick = !widget._onClick;
+                });
+              }, icon: widget._onClick
+              ? Icon(Icons.check_box_outline_blank, color: Colors.black,)
+              : Icon(Icons.check_box_outlined, color: Colors.green,)),
+                ],
+              )
+              
+          ]),
+        )
+      ],
+    );
   }
 }

@@ -43,7 +43,7 @@ List<FoodItems> foodItemList = [
       name: "Chicken",
       imageUrl:
           "https://toppng.com/uploads/preview/fried-chicken-115400746154bqe3zcl5t.png"),
-          FoodItems(
+  FoodItems(
       name: "Healthy",
       imageUrl:
           "https://previews.123rf.com/images/firstblood/firstblood1506/firstblood150600075/40973395-transparent-glass-bowl-with-greek-salad-isolated-on-white-background-top-view.jpg"),
@@ -74,13 +74,13 @@ List<FoodItems> foodItemList = [
 ];
 
 class Restaurants {
-  String imageUrl, title, locations, rating,
-  description,
-   price;
+  String imageUrl, title, locations, rating, description, price;
+  int id;
 
   Restaurants(
       {required this.imageUrl,
       required this.title,
+      required this.id,
       required this.locations,
       required this.rating,
       required this.description,
@@ -90,6 +90,7 @@ class Restaurants {
 List<Restaurants> restaurantList = [
   Restaurants(
       title: "Om Sweet & Snacks",
+      id: 1,
       locations: "North Indian,  South Indian, Chinese",
       description:
           "Om Sweets and Snacks is a popular Indian hotel chain known for its authentic vegetarian cuisine, traditional sweets, and snacks. With a legacy spanning over 50 years, the restaurant prides itself on using only the freshest ingredients and traditional cooking techniques to create delicious dishes bursting with flavor. The warm and welcoming ambiance, combined with excellent customer service, makes it a favorite among locals and visitors alike. Whether you're in the mood for a quick snack or a hearty meal, Om Sweets and Snacks has something for everyone",
@@ -99,6 +100,7 @@ List<Restaurants> restaurantList = [
           "https://images.aws.nestle.recipes/original/65f4b67b8cbea8a3cff7fe2e776a715a_orange_scented_gulab_jamun.jpg"),
   Restaurants(
     title: "The Masala Story",
+    id: 2,
     locations: "North Indian, Mughlai, Kebab",
     description:
         "The Masala Story is a renowned Indian restaurant that offers a modern twist on classic Indian cuisine. With a focus on fresh, high-quality ingredients, The Masala Story creates dishes that are both flavorful and visually stunning. From traditional curries and tandoori specialties to innovative small plates and fusion dishes, the menu at The Masala Story offers something for every palate. The restaurant's contemporary yet inviting ambiance, combined with attentive service, make it a popular destination for food lovers in search of a memorable dining experience",
@@ -109,6 +111,7 @@ List<Restaurants> restaurantList = [
   ),
   Restaurants(
     title: "Domino's Pizza",
+    id: 3,
     locations: "Pizza, Fast Food",
     description:
         "Domino's Pizza is a popular pizza restaurant chain that offers a wide selection of delicious pizzas, sides, and desserts. With a focus on fresh, high-quality ingredients, Domino's Pizza creates pizzas that are both flavorful and visually stunning. From traditional pizzas to innovative fusion dishes, the menu at Domino's Pizza offers something for every palate. The restaurant's contemporary yet inviting ambiance, combined with attentive service, make it a popular destination for food lovers in search of a memorable dining experience",
@@ -119,6 +122,7 @@ List<Restaurants> restaurantList = [
   ),
   Restaurants(
     title: "MC Donald's",
+    id: 4,
     locations: "Burger, Fast Food, Beverages",
     description:
         "McDonald's is a popular fast food restaurant chain that offers a wide selection of delicious burgers, sides, and desserts. With a focus on fresh, high-quality ingredients, McDonald's creates burgers that are both flavorful and visually stunning. From traditional burgers to innovative fusion dishes, the menu at McDonald's offers something for every palate. The restaurant's contemporary yet inviting ambiance, combined with attentive service, make it a popular destination for food lovers in search of a memorable dining experience",
@@ -129,6 +133,7 @@ List<Restaurants> restaurantList = [
   ),
   Restaurants(
     title: "Gohana Faous Jalebi",
+    id: 5,
     locations: "Street Food, Mithai",
     description:
         "Gohana Famous Jalebi is a popular Indian sweet shop that offers a wide selection of delicious sweets and snacks. With a focus on fresh, high-quality ingredients, Gohana Famous Jalebi creates dishes that are both flavorful and visually stunning. From traditional sweets to innovative fusion dishes, the menu at Gohana Famous Jalebi offers something for every palate. The restaurant's contemporary yet inviting ambiance, combined with attentive service, make it a popular destination for food lovers in search of a memorable dining experience",
@@ -138,6 +143,7 @@ List<Restaurants> restaurantList = [
   ),
   Restaurants(
     title: "Burger King",
+    id: 6,
     locations: "Burger, American, Desserts",
     description:
         "Burger King is a popular fast food restaurant chain that offers a wide selection of delicious burgers, sides, and desserts. With a focus on fresh, high-quality ingredients, Burger King creates burgers that are both flavorful and visually stunning. From traditional burgers to innovative fusion dishes, the menu at Burger King offers something for every palate. The restaurant's contemporary yet inviting ambiance, combined with attentive service, make it a popular destination for food lovers in search of a memorable dining experience",
@@ -148,6 +154,7 @@ List<Restaurants> restaurantList = [
   ),
   Restaurants(
     title: "Haldiram's",
+    id: 7,
     locations: "North Indian, Mithai, South Indian",
     description:
         "Haldiram's is a popular Indian restaurant chain that offers a wide selection of delicious sweets and snacks. With a focus on fresh, high-quality ingredients, Haldiram's creates dishes that are both flavorful and visually stunning. From traditional sweets to innovative fusion dishes, the menu at Haldiram's offers something for every palate. The restaurant's contemporary yet inviting ambiance, combined with attentive service, make it a popular destination for food lovers in search of a memorable dining experience",
@@ -156,4 +163,56 @@ List<Restaurants> restaurantList = [
     imageUrl:
         "https://media.self.com/photos/5ebd7a636ed447b59b846244/4:3/w_2560%2Cc_limit/snack-plate.jpg",
   ),
+];
+
+class Restaurants1 {
+  String  title, price;
+
+  Restaurants1(
+      {
+      required this.title,
+      
+      required this.price});
+}
+
+List<Restaurants1> restaurantList1 = [
+  Restaurants1(
+      title: "Jalebi",
+      price: "50",),
+  Restaurants1(
+      title: "Rasgulla",
+      price: "100",),
+  Restaurants1(
+      title: "Rasmalai",
+      price: "100",),
+  Restaurants1(
+      title: "Gulab Jamun",
+      price: "70",),
+  Restaurants1(
+      title: "Besan Ladoo",
+      price: "160",),
+  Restaurants1(
+      title: "Kaju Katli",
+      price: "200",),
+  Restaurants1(
+      title: "Rava Ladoo",
+      price: "160",),
+  Restaurants1(
+      title: "Moong Dal Halwa",
+      price: "200",),
+];
+
+class Restaurants6 {
+  String name, price;
+
+  Restaurants6({required this.name, required this.price});
+}
+
+List<Restaurants6> restaurantList6= [
+  Restaurants6(name: "Veg Burger", price: "150"),
+  Restaurants6(name: "Chicken Burger", price: "250"),
+  Restaurants6(name: "Paneer Burger", price: "250"),
+  Restaurants6(name: "Veg Burger", price: "350"),
+  Restaurants6(name: "Chicken Burger", price: "250"),
+  Restaurants6(name: "Paneer Burger", price: "250"),
 ];

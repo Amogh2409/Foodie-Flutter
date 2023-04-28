@@ -1,6 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:foodie/HomePage/MapPage.dart';
 import 'package:foodie/HomePage/Restaurant.dart';
 import 'package:foodie/HomePage/profile.dart';
 
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _pages = [
     const MainHomePage(),
     const Restaurant(),
-    const MainHomePage(),
+    const MapPage(),
     const ProfileScreen(),
   ];
   int _selectedIndex = 0;
