@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+String? getUserEmail(){
+  final User? user = _auth.currentUser;
+  if(user != null){
+    return user.email;
+  }
+  return null;
+}
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -83,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
                   height: 5,
                 ),
                 Text(
-                  'amoghsaxena24@gmail.com',
+                  getUserEmail().toString(),
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
@@ -156,7 +167,10 @@ class ProfileScreen extends StatelessWidget {
                 ProfileMenuWidget(
                   text: 'Log Out',
                   icon: LineAwesomeIcons.alternate_sign_out,
-                  press: () {},
+                  press: () {
+                    _auth.signOut();
+                    Navigator.pop(context);
+                  },
                   endIcon: false,
                   color: Colors.red,
                 ),
