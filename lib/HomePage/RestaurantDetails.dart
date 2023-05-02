@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodie/constants.dart';
 
+int value = 0;
+
 class RestaurantDetails extends StatelessWidget {
   final int index;
   const RestaurantDetails({super.key, required this.index});
@@ -12,15 +14,15 @@ class RestaurantDetails extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         elevation: 0,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           height: 50,
           decoration: BoxDecoration(
             color: kPrimaryColor,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                offset: Offset(0, 10),
+                offset: const Offset(0, 10),
                 blurRadius: 50,
                 color: kPrimaryColor.withOpacity(.23),
               ),
@@ -37,6 +39,16 @@ class RestaurantDetails extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              SizedBox(width: 10),
+              if (value != 0)
+                Text(
+                  "(${value.toString()})",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
             ],
           ),
         ),
@@ -56,7 +68,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var he = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.only(top: 50),
       height: he.height,
       width: he.width,
       decoration: BoxDecoration(
@@ -89,6 +101,136 @@ class MainScreen extends StatelessWidget {
   }
 }
 
+
+class MenuItems extends StatefulWidget {
+  MenuItems({Key? key, required this.index});
+
+  final int index;
+
+  @override
+  State<MenuItems> createState() => _MenuItemsState();
+}
+
+class _MenuItemsState extends State<MenuItems> {
+  late List<bool> _onClick;
+
+  @override
+  void initState() {
+    super.initState();
+    _onClick = List.generate(5, (index) => false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.only(top: 6, left: 25, right: 25),
+          height: size.height * 0.06,
+          width: size.width,
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
+            ),
+          ),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Menu",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Spacer(),
+              Text(
+                "View all",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 15,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+        for (int i = 0; i < 5; i++)
+          Container(
+            padding: const EdgeInsets.only(top: 6, left: 25, right: 25),
+            height: size.height * 0.06,
+            width: size.width,
+            margin: const EdgeInsets.only(bottom: 10),
+            decoration: BoxDecoration(
+              color: Colors.transparent.withOpacity(0.01),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(50),
+              ),
+            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(restaurantList1[i].title,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      )),
+                  Row(
+                    children: [
+                      Text(
+                        restaurantList1[i].price,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _onClick[i] = !_onClick[i];
+                          });
+                          if (_onClick[i]) {
+                            // Add the item to the cart when the checkbox is checked
+                            // widget.addToCart(restaurantList1[i]);
+                          }
+                        },
+                        icon: _onClick[i]
+                            ? const Icon(
+                                Icons.check_box_outlined,
+                                color: Colors.green,
+                              )
+                            : const Icon(
+                                Icons.check_box_outline_blank,
+                                color: Colors.black,
+                              ),
+                      ),
+                    ],
+                  )
+                ]),
+          )
+      ],
+    );
+  }
+}
+
+
+
+
+
 class TopImage extends StatefulWidget {
   final int index;
   const TopImage({super.key, required this.index});
@@ -106,7 +248,7 @@ class _TopImageState extends State<TopImage> {
       width: he.width,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(50),
           bottomRight: Radius.circular(50),
         ),
@@ -123,7 +265,7 @@ class _TopImageState extends State<TopImage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     size: 28,
                     color: kPrimaryColor,
@@ -133,7 +275,7 @@ class _TopImageState extends State<TopImage> {
               right: 20,
               child: IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.favorite,
                     size: 28,
                     color: kPrimaryColor,
@@ -280,111 +422,5 @@ class _FoodDescriptionState extends State<FoodDescription> {
           });
         },
         child: Text(_showFullText ? "Show less" : "Show more"));
-  }
-}
-
-class MenuItems extends StatefulWidget {
-  
-  MenuItems({super.key, required this.index});
-
-  bool _onClick = true;
-  final int index;
-  @override
-  State<MenuItems> createState() => _MenuItemsState();
-}
-
-class _MenuItemsState extends State<MenuItems> {
-  @override
-  Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(top: 6, left: 25, right: 25),
-          height: size.height * 0.06,
-          width: size.width,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.all(
-              Radius.circular(50),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Menu",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Spacer(),
-              Text(
-                "View all",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 15,
-                color: Colors.black,
-              ),
-            ],
-          ),
-        ),
-        for(int i =0; i<5; i++)
-        
-        Container(
-          padding: EdgeInsets.only(top: 6, left: 25, right: 25),
-          height: size.height * 0.06,
-          width: size.width,
-          margin: EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-            color: Colors.transparent.withOpacity(0.01),
-            borderRadius: BorderRadius.all(
-              Radius.circular(50),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              
-              Text(restaurantList1[i].title,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  )),
-              Row(
-                children: [
-                  Text(restaurantList1[i].price,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  )),
-              SizedBox(
-                width: 10,
-              ),
-              IconButton(onPressed: (){
-                setState(() {
-                  widget._onClick = !widget._onClick;
-                });
-              }, icon: widget._onClick
-              ? Icon(Icons.check_box_outline_blank, color: Colors.black,)
-              : Icon(Icons.check_box_outlined, color: Colors.green,)),
-                ],
-              )
-              
-          ]),
-        )
-      ],
-    );
   }
 }
